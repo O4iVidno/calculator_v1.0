@@ -3,61 +3,68 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    char znak; 
-    double a, b, result; 
-    cout << "Enter the first number:" << endl;
-    cin >> a; 
-    while (true) { 
-        cout << endl << "Enter Operation sign: " << endl << "Sum: + " << endl << "Sub: - " << endl << "Multiplication: * " << endl << "Division: / " << endl << "Quit: Q " << endl << "Clear: C " << endl  << endl;
-        cin >> znak; 
-        if (znak == 'Q') {
-            cout << endl << "Bye!" << endl;
-            return 0; 
+    char znak; //Создаю переменную, в которую в будующем будет помещаться знак операции
+    double a, b, result; //Создаю переменные: 1 число, 2 число и ответ. Все в double, чтоб при делении и продолжении работы с калькулятором знаки после запятой не терять
+    cout << "Введите первое число:" << endl; // Вывожу текст в консоли
+    cin >> a; // Сохраняет переменную с конси в 1 число 
+    while (true) { //Калькулятор работает, пока его не "Выключат"
+        cout << endl << "Введите знак операции: " << endl << "Сложение: + " << endl << "Вычитание: - " << endl << "Умножение: * " << endl << "Деление: / " << endl << "Quit: Q " << endl << "Clear: C " << endl << endl;
+        cin >> znak; // Сохраняет переменную с конси в знак операции
+        if (znak == 'Q') { //Проверка операции на наличие Q - quit, если есть то:...
+            cout << endl << "Ваш последний результат: " << endl << result << endl << "Пока" << endl;
+
+            return 0; // ... Выключает калькулятор
         }
-        else {
-            while (znak != 'Q') {  
-                switch (znak) 
+        else { //Иначе проверят на наличие других знаков операций и "Функций"
+            while (znak != 'Q') { //Позволяет производить действия над прошлым результатом  
+                switch (znak) //Позволяет добавить различные знаки, которым приписываются свойства
                 {
                 case '+':
-                    cout << endl << "Enter the second number:" << endl;
+                    cout << endl << "Введите второе число:" << endl;
                     cin >> b;
-                    result = a + b; 
-                    cout << endl << "---" << endl << "Result: " << result << endl << "---" << endl; 
-                    a = result; 
-                    break; 
+                    result = a + b; //Сохраняет всю "операцию" в переменную
+                    cout << endl << "---" << endl << "Ответ: " << result << endl << "---" << endl; //Выводит результат той или иной "операции" в консоль
+                    a = result; // записывает в 1 число ответ всей прошлой "операцию", чтоб можно было в дальнейшем с ней производить какие-либо дейстивия
+                    break; // Выкидывает из цикла
 
                 case '-':
-                    cout << endl << "Enter the second number:" << endl;
+                    cout << endl << "Введите второе число:" << endl;
                     cin >> b;
                     result = a - b;
-                    cout << endl << "---" << endl << "Result: " << result << endl << "---" << endl;
+                    cout << endl << "---" << endl << "Ответ: " << result << endl << "---" << endl;
                     a = result;
                     break;
 
                 case '*':
-                    cout << endl << "Enter the second number:" << endl;
+                    cout << endl << "Введите второе число:" << endl;
                     cin >> b;
                     result = a * b;
-                    cout << endl << "---" << endl << "Result: " << result << endl << "---" << endl;
+                    cout << endl << "---" << endl << "Ответ: " << result << endl << "---" << endl;
                     a = result;
                     break;
 
                 case '/':
-                    cout << endl << "Enter the second number:" << endl;
+                    cout << endl << "Введите второе число:" << endl;
                     cin >> b;
-                    result = (double)a / b; 
-                    cout << endl << "---" << endl << "Result: " << result << endl << "---" << endl;
-                    a = result;
-                    break;
+                    if (b == 0) { // проверка на деление на 0
+                        cout << endl << "На 0 делить нельзя!" << endl;
+                        break;
+                    }
+                    else {
+                        result = (double)a / b; // double используется, чтоб не потерять после запятой. Но можно и обойтись без него
+                        cout << endl << "---" << endl << "Ответ: " << result << endl << "---" << endl;
+                        a = result;
+                        break;
+                    }
 
                 case 'C':
-                    result = 0;
-                    cout << endl << "Enter the first number:" << endl;
+                    result = 0; //обнуляет результат C - clear
+                    cout << endl << "Введите первое число:" << endl;
                     cin >> a;
                     break;
 
-                default:
-                    cout << endl << "Choose a sign from the list, otherwise I can't help you." << endl;
+                default: // Cрабатывает в случае, если вводится вместо знака что-то, кроме знакомых знаков: Q, C, +, -, /, *.
+                    cout << endl << "Вы ввели неизвсетный мне знак операции." << endl;
                     break;
                 }
                 break;
