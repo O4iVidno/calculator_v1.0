@@ -2,7 +2,6 @@
 using namespace std;
 int main()
 {
-    setlocale(LC_ALL, "Rus");
     char znak; 
     double a, b, result; 
     cout << "Enter the first number:" << endl; 
